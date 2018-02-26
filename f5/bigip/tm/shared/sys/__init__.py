@@ -1,6 +1,6 @@
 # coding=utf-8
 #
-# Copyright 2016 F5 Networks Inc.
+# Copyright 2018 F5 Networks Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,30 +15,27 @@
 # limitations under the License.
 #
 
-"""BIG-IP® Shared (shared) module
+"""BIG-IP® Shared/Sys (shared/sys) module
 
 REST URI
-    ``http://localhost/mgmt/tm/shared/``
+    ``http://localhost/mgmt/tm/shared/sys``
 
 GUI Path
-    ``System``
+    ``N/A``
 
 REST Kind
     N/A -- HTTP GET returns an error
 """
 
 from f5.bigip.resource import PathElement
-from f5.bigip.tm.shared.bigip_failover_state import Bigip_Failover_State
-from f5.bigip.tm.shared.licensing import Licensing
-from f5.bigip.tm.shared.sys import Sys
+from f5.bigip.tm.shared.sys.backup import Backups
 
 
-class Shared(PathElement):
-    """BIG-IP® System Shared Utility (shared) collection."""
-    def __init__(self, bigip):
-        super(Shared, self).__init__(bigip)
+class Sys(PathElement):
+    """BIG-IP® System Shared/Sys Utility (sys) collection."""
+    def __init__(self, shared):
+        super(Sys, self).__init__(shared)
         self._meta_data['allowed_lazy_attributes'] = [
-            Licensing,
-            Bigip_Failover_State,
-            Sys,
+            Backups,
         ]
+
