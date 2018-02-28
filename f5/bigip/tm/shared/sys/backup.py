@@ -62,8 +62,12 @@ class Backup(Resource):
         self._meta_data['allowed_lazy_attributes'] = []
         self._meta_data['required_json_kind'] = \
             'tm:shared:sys:backup:ucsbackuptaskitemstate'
+        self._meta_data['required_load_parameters'] = set(('id',))
     def create(self, **kwargs):
         '''Start a backup job. Requires name, file, and action parameters. action should be BACKUP.'''
-        self._meta_data['required_creation_parameters'].update(['action', 'file'])
+        self._meta_data['required_creation_parameters'] = set(['action', 'file'])
         return super(Backup, self)._create(**kwargs)
-
+#    def load(self, **kwargs):
+#        '''Load a backup job resource by id'''
+#        self._meta_data['required_load_parameters'] = set(['id'])
+#        return super(Backup, self)._load(**kwargs)
